@@ -57,15 +57,15 @@ while True:
     glLoadIdentity()
 
     # rect.rotate(1)
-    rect2.rotate(-5)
-    rect.scale(1.005)
-    circle.scale(1.005)
-    tri.rotate(1)
-    tri.scale(1.005)
+    rect.translate(1, 1)
+    rect2.translate(1, 1)
+    tri.translate(1, 1)
+    circle.translate(0, 1)
+
     
-    # rect.draw()
-    # rect2.draw()
-    # circle.draw()
+    rect.draw()
+    rect2.draw()
+    circle.draw()
 
     tri.draw()
 

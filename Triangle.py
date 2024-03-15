@@ -51,6 +51,12 @@ class Triangle(Shape):
     self.angle += angle
     self.updateVertices()
 
+  def translate(self, dx, dy):
+    self.p1 = (self.p1[0] + dx, self.p1[1] + dy)
+    self.p2 = (self.p2[0] + dx, self.p2[1] + dy)
+    self.p3 = (self.p3[0] + dx, self.p3[1] + dy)
+    self.updateVertices()
+
   def updateVertices(self):
     self.center = ((self.p1[0] + self.p2[0] + self.p3[0]) / 3,
       (self.p1[1] + self.p2[1] + self.p3[1]) / 3)

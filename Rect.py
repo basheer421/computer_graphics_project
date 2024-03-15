@@ -44,6 +44,13 @@ class Rect(Shape):
 		self.width *= factor
 		self.height *= factor
 		self.updateVertices()
+	
+	def rotate(self, angle):
+		super().rotate(angle)
+	
+	def translate(self, dx, dy):
+		super().translate(dx, dy)
+		self.updateVertices()
 
 	def updateVertices(self):
 		self.center = (self.x + self.width / 2, self.y + self.height / 2)
