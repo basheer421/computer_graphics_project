@@ -4,6 +4,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from Rect import Rect
+from Circle import Circle
 
 # Initialize Pygame
 pygame.init()
@@ -29,6 +30,11 @@ rect2 = Rect(300, 200, 100, 100,
               fillColor=(0.7, 0.0, 1.0),
               angle=45)
 
+# Create a circle
+circle = Circle(500, 300, 50,
+                borderColor=(1.0, 0.5, 0.0),
+                fillColor=(0.7, 0.0, 1.0))
+
 
 # Set up clock for controlling frame rate
 clock = pygame.time.Clock()
@@ -48,9 +54,9 @@ while True:
     rect.rotate(1)
     rect2.rotate(-5)
     rect.draw()
-
-    
     rect2.draw()
+    circle.draw()
+
     # Update the display
     pygame.display.flip()
 
