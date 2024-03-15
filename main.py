@@ -5,6 +5,7 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from Rect import Rect
 from Circle import Circle
+from Triangle import Triangle
 
 # Initialize Pygame
 pygame.init()
@@ -35,6 +36,10 @@ circle = Circle(500, 300, 50,
                 borderColor=(1.0, 0.5, 0.0),
                 fillColor=(1.0, 0.0, 1.0))
 
+tri = Triangle((100, 100), (200, 100), (150, 50),
+                borderColor=(1.0, 0.5, 0.0),
+                fillColor=(0.0, 0.0, 0.0))
+
 
 # Set up clock for controlling frame rate
 clock = pygame.time.Clock()
@@ -55,10 +60,14 @@ while True:
     rect2.rotate(-5)
     rect.scale(1.005)
     circle.scale(1.005)
+    tri.rotate(1)
+    tri.scale(1.005)
     
-    rect.draw()
-    rect2.draw()
-    circle.draw()
+    # rect.draw()
+    # rect2.draw()
+    # circle.draw()
+
+    tri.draw()
 
     # Update the display
     pygame.display.flip()
