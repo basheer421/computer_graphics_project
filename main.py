@@ -24,13 +24,15 @@ rect = Rect(100, 100, 100, 100,
             fillColor=(0.7, 0.0, 1.0),
             angle=90)
 
+rect2 = Rect(300, 200, 100, 100,
+              borderColor=(1.0, 0.5, 0.0),
+              fillColor=(0.7, 0.0, 1.0),
+              angle=45)
+
+
 # Set up clock for controlling frame rate
 clock = pygame.time.Clock()
 target_fps = 60
-
-# Initial angle and angular velocity
-angle = 0
-angular_velocity = 0.1  # Degrees per second
 
 while True:
     for event in pygame.event.get():
@@ -41,16 +43,16 @@ while True:
 
     # Clear the screen and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glLoadIdentity()
 
-    # Calculate the elapsed time since the last frame
-    dt = clock.tick(target_fps) / 1000.0  # Convert milliseconds to seconds
-
-    # Update the angle based on angular velocity and elapsed time
-    angle += angular_velocity * dt
-
-    # Draw and rotate the rectangle
-    rect.rotate(angle)
+    rect.rotate(1)
+    rect2.rotate(-5)
     rect.draw()
 
+    
+    rect2.draw()
     # Update the display
     pygame.display.flip()
+
+    # Cap the frame rate
+    clock.tick(target_fps)

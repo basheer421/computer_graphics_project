@@ -1,5 +1,3 @@
-import math
-
 from Shape import *
 
 
@@ -29,29 +27,12 @@ class Rect(Shape):
         # Rotate the rectangle
         self.rotate(angle)
 
-    def rotate(self, angle):
-        super().rotate(angle)
-        _angle = math.radians(self.angle)
-        _cos = math.cos(_angle)
-        _sin = math.sin(_angle)
-
-        def _rotatePoint(x, y, center_x, center_y, cos, sin):
-            # Translate point to the origin (center of the rectangle)
-            x -= center_x
-            y -= center_y
-            # Rotate around the origin
-            new_x = x * cos - y * sin
-            new_y = x * sin + y * cos
-            # Translate back to the original position
-            return new_x + center_x, new_y + center_y
-
-        # Rotate each vertex around the center of the rectangle
-        self.vertices = [
-            _rotatePoint(x, y, *self.center, _cos, _sin)
-            for x, y in self.vertices
-        ]
-
     def draw(self):
+        glPushMatrix()
+
+        glTranslatef(self.center[0], self.center[1], 0)
+        glRotatef(self.angle, 0, 0, 1)
+        glTranslatef(-self.center[0], -self.center[1], 0)
 
         glColor3f(*self.fillColor)
         glBegin(GL_QUADS)
@@ -65,3 +46,5 @@ class Rect(Shape):
             glVertex2f(*self.vertices[i])
             glVertex2f(*self.vertices[(i + 1) % 4])
         glEnd()
+
+        glPopMatrix()
