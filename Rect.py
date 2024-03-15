@@ -1,6 +1,5 @@
 from Shape import *
 
-
 class Rect(Shape):
 	def __init__(self, x, y, width, height,
 				 angle=0,
