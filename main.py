@@ -33,7 +33,7 @@ rect2 = Rect(300, 200, 100, 100,
 # Create a circle
 circle = Circle(500, 300, 50,
                 borderColor=(1.0, 0.5, 0.0),
-                fillColor=(0.7, 0.0, 1.0))
+                fillColor=(1.0, 0.0, 1.0))
 
 
 # Set up clock for controlling frame rate
@@ -53,6 +53,8 @@ while True:
 
     rect.rotate(1)
     rect2.rotate(-5)
+    rect.scale(1.01)
+    
     rect.draw()
     rect2.draw()
     circle.draw()
