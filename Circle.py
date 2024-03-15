@@ -43,4 +43,4 @@ class Circle(Shape):
 
 	def scale(self, factor):
 			self.radius *= factor
-			super().scale(factor)
+			# super().scale(factor)

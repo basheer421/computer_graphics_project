@@ -54,6 +54,7 @@ while True:
     # rect.rotate(1)
     rect2.rotate(-5)
     rect.scale(1.005)
+    circle.scale(1.005)
     
     rect.draw()
     rect2.draw()
