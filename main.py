@@ -51,9 +51,9 @@ while True:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
 
-    rect.rotate(1)
+    # rect.rotate(1)
     rect2.rotate(-5)
-    rect.scale(1.01)
+    rect.scale(1.005)
     
     rect.draw()
     rect2.draw()

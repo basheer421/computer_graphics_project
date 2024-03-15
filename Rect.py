@@ -13,16 +13,7 @@ class Rect(Shape):
 		self.borderColor = borderColor
 		self.fillColor = fillColor
 
-		# Calculate the center of the rectangle
-		self.center = (self.x + self.width / 2, self.y + self.height / 2)
-
-		# Initialize vertices
-		self.vertices = [
-			(self.x, self.y),
-			(self.x + self.width, self.y),
-			(self.x + self.width, self.y + self.height),
-			(self.x, self.y + self.height)
-		]
+		self.updateVertices()
 
 		# Rotate the rectangle
 		self.rotate(angle)
@@ -48,3 +39,18 @@ class Rect(Shape):
 		glEnd()
 
 		glPopMatrix()
+
+	def scale(self, factor):
+		# super().scale(factor)
+		self.width *= factor
+		self.height *= factor
+		self.updateVertices()
+
+	def updateVertices(self):
+		self.center = (self.x + self.width / 2, self.y + self.height / 2)
+		self.vertices = [
+			(self.x, self.y),
+			(self.x + self.width, self.y),
+			(self.x + self.width, self.y + self.height),
+			(self.x, self.y + self.height)
+		]
