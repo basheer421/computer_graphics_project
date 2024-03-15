@@ -11,7 +11,7 @@ class Shape:
     def translate(self, deltaX, deltaY):
         self.x += deltaX
         self.y += deltaY
-    
+
     def scale(self, factor):
         self.x *= factor
         self.y *= factor
@@ -19,6 +19,7 @@ class Shape:
     # Rotate counter clockwise in degrees
     def rotate(self, angle):
         self.angle += angle
+        self.angle %= 360
 
     def __str__(self):
         return (
