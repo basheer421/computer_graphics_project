@@ -33,9 +33,7 @@ clouds = [
     Cloud(600, 155, 30)
 ]
 
-trees = [
-    Tree(120, 400, 10, 100)
-]
+tree = Tree(120, 400, 10, 50)
 
 # Set up clock for controlling frame rate
 clock = pygame.time.Clock()
@@ -51,6 +49,8 @@ while True:
     # Clear the screen and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
+    time = pygame.time.get_ticks() // 1000.0
+    print("Time: ", time, "s")
 
     # Scenery
     sky.draw()
@@ -59,11 +59,9 @@ while True:
     for cloud in clouds:
         cloud.animate()
         cloud.draw()
-    for tree in trees:
+    if (time > 1) and (time < 20):
         tree.animate()
         tree.draw()
-    
-
 
     pygame.display.flip()
     clock.tick(target_fps)

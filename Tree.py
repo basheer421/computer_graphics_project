@@ -39,4 +39,4 @@ class Tree:
   
   def animate(self):
     self.scale(1.0008)
-    self.translate(0, -0.1)
+    self.translate(0, -0.01)
