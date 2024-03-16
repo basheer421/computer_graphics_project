@@ -10,10 +10,7 @@ from Triangle import Triangle
 from Cloud import Cloud
 from Tree import Tree
 
-# Initialize Pygame
 pygame.init()
-
-# Set up display
 display = (800, 600)
 pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
 pygame.display.set_caption("Computer graphics scene")
@@ -37,7 +34,7 @@ clouds = [
 ]
 
 trees = [
-    Tree(120, 400, 20, 100)
+    Tree(120, 400, 10, 100)
 ]
 
 # Set up clock for controlling frame rate
@@ -55,6 +52,7 @@ while True:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
 
+    # Scenery
     sky.draw()
     grass.draw()
     sun.draw()
@@ -62,7 +60,10 @@ while True:
         cloud.animate()
         cloud.draw()
     for tree in trees:
+        tree.animate()
         tree.draw()
+    
+
 
     pygame.display.flip()
     clock.tick(target_fps)
