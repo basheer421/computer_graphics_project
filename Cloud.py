@@ -16,8 +16,11 @@ class Cloud:
         pygame.draw.circle(screen, WHITE, (160, 150), 30)
     """
     self.circles = [
-      Circle(x + (20 * i), y - (20 * (i % 2 != 0)), radius, self.borderColor, self.fillColor)
-      for i in range(5)
+      Circle(x, y, radius, self.borderColor, self.fillColor),
+      Circle(x + 20, y, radius, self.borderColor, self.fillColor),
+      Circle(x + 30, y - 20, radius, self.borderColor, self.fillColor),
+      Circle(x + 40, y, radius, self.borderColor, self.fillColor),
+      Circle(x + 60, y, radius, self.borderColor, self.fillColor)
     ]
 
   def draw(self):

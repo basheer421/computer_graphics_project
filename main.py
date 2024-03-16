@@ -3,10 +3,12 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+from colors import *
 from Rect import Rect
 from Circle import Circle
 from Triangle import Triangle
 from Cloud import Cloud
+from Tree import Tree
 
 # Initialize Pygame
 pygame.init()
@@ -22,14 +24,20 @@ glLoadIdentity()
 glOrtho(0, display[0], display[1], 0, -1, 1)
 glMatrixMode(GL_MODELVIEW)
 
-sky = Rect(0, 0, 800, 300, fillColor=(135/255, 206/255, 235/255))
-grass = Rect(0, 300, 800, 300, fillColor=(34/255, 139/255, 34/255))
-sun = Circle(70, 70, 40, fillColor=(1, 1, 0))
+sky = Rect(0, 0, 800, 300, fillColor=BLUE, borderColor=BLUE)
+grass = Rect(0, 300, 800, 300, fillColor=DGREEN, borderColor=DGREEN)
+sun = Circle(70, 70, 40, fillColor=YELLOW, borderColor=YELLOW)
 
 clouds = [
     Cloud(100, 150, 30),
-    # Cloud(300, 150, 30),
-    # Cloud(390, 150, 25)
+    Cloud(300, 180, 30),
+    Cloud(390, 120, 25),
+    Cloud(500, 160, 30),
+    Cloud(600, 155, 30)
+]
+
+trees = [
+    Tree(120, 400, 20, 100)
 ]
 
 # Set up clock for controlling frame rate
@@ -59,9 +67,10 @@ while True:
     # Draw white cloud shapes in the sky
     for cloud in clouds:
         cloud.draw()
-
-
     
+    # Draw green tree shapes on the grass
+    for tree in trees:
+        tree.draw()
 
     # Update the display
     pygame.display.flip()
