@@ -6,6 +6,7 @@ from OpenGL.GLU import *
 from Rect import Rect
 from Circle import Circle
 from Triangle import Triangle
+from Cloud import Cloud
 
 # Initialize Pygame
 pygame.init()
@@ -21,25 +22,15 @@ glLoadIdentity()
 glOrtho(0, display[0], display[1], 0, -1, 1)
 glMatrixMode(GL_MODELVIEW)
 
-rect = Rect(100, 100, 100, 100,
-            borderColor=(1.0, 0.5, 0.0),
-            fillColor=(0.7, 0.0, 1.0),
-            angle=90)
+sky = Rect(0, 0, 800, 300, fillColor=(135/255, 206/255, 235/255))
+grass = Rect(0, 300, 800, 300, fillColor=(34/255, 139/255, 34/255))
+sun = Circle(70, 70, 40, fillColor=(1, 1, 0))
 
-rect2 = Rect(300, 200, 100, 100,
-              borderColor=(1.0, 0.5, 0.0),
-              fillColor=(0.7, 0.0, 1.0),
-              angle=45)
-
-# Create a circle
-circle = Circle(500, 300, 50,
-                borderColor=(1.0, 0.5, 0.0),
-                fillColor=(1.0, 0.0, 1.0))
-
-tri = Triangle((100, 100), (200, 100), (150, 50),
-                borderColor=(1.0, 0.5, 0.0),
-                fillColor=(0.0, 0.0, 0.0))
-
+clouds = [
+    Cloud(100, 150, 30),
+    # Cloud(300, 150, 30),
+    # Cloud(390, 150, 25)
+]
 
 # Set up clock for controlling frame rate
 clock = pygame.time.Clock()
@@ -56,18 +47,21 @@ while True:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
 
-    # rect.rotate(1)
-    rect.translate(1, 1)
-    rect2.translate(1, 1)
-    tri.translate(1, 1)
-    circle.translate(0, 1)
+    # Fill top half with blue for the sky
+    sky.draw()
+
+    # Fill bottom half with green for the grass
+    grass.draw()
+
+    # Draw yellow sun in the sky
+    sun.draw()
+
+    # Draw white cloud shapes in the sky
+    for cloud in clouds:
+        cloud.draw()
+
 
     
-    rect.draw()
-    rect2.draw()
-    circle.draw()
-
-    tri.draw()
 
     # Update the display
     pygame.display.flip()
