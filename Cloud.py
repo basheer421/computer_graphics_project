@@ -7,14 +7,6 @@ class Cloud:
     self.radius = radius
     self.borderColor = (255, 255, 255)
     self.fillColor = (255, 255, 255)
-    # self.circle = Circle(x, y, radius, self.borderColor, self.fillColor)
-    """
-       pygame.draw.circle(screen, WHITE, (100, 150), 30)
-        pygame.draw.circle(screen, WHITE, (120, 150), 30)
-        pygame.draw.circle(screen, WHITE, (130, 130), 30)
-        pygame.draw.circle(screen, WHITE, (140, 150), 30)
-        pygame.draw.circle(screen, WHITE, (160, 150), 30)
-    """
     self.circles = [
       Circle(x, y, radius, self.borderColor, self.fillColor),
       Circle(x + 20, y, radius, self.borderColor, self.fillColor),
@@ -22,6 +14,7 @@ class Cloud:
       Circle(x + 40, y, radius, self.borderColor, self.fillColor),
       Circle(x + 60, y, radius, self.borderColor, self.fillColor)
     ]
+    self.dx = .2
 
   def draw(self):
     for circle in self.circles:
@@ -34,3 +27,8 @@ class Cloud:
   def scale(self, factor):
     for circle in self.circles:
       circle.scale(factor)
+  
+  def animate(self):
+    if (self.circles[0].x + self.radius) >= 800 or (self.circles[4].x - self.radius) <= 0:
+      self.dx *= -1
+    self.translate(self.dx, 0)

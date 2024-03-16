@@ -55,25 +55,14 @@ while True:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
 
-    # Fill top half with blue for the sky
     sky.draw()
-
-    # Fill bottom half with green for the grass
     grass.draw()
-
-    # Draw yellow sun in the sky
     sun.draw()
-
-    # Draw white cloud shapes in the sky
     for cloud in clouds:
+        cloud.animate()
         cloud.draw()
-    
-    # Draw green tree shapes on the grass
     for tree in trees:
         tree.draw()
 
-    # Update the display
     pygame.display.flip()
-
-    # Cap the frame rate
     clock.tick(target_fps)
