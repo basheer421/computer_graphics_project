@@ -21,14 +21,19 @@ class Tree:
       Circle(trunkTopMiddle[0] - halfLeaveRadius, trunkTopMiddle[1] - halfLeaveRadius, leaveRadius, fillColor=GREEN, borderColor=GREEN),
       Circle(trunkTopMiddle[0] + halfLeaveRadius, trunkTopMiddle[1] - halfLeaveRadius, leaveRadius, fillColor=GREEN, borderColor=GREEN)
     ]
+    self.apples = []
   
   def draw(self):
     self.trunk.draw()
     for leaf in self.leaves:
       leaf.draw()
+    for apple in self.apples:
+      apple.draw()
   
   def scale(self, factor):
-    self.__init__(self.x, self.y, self.width * factor, self.height * factor)
+    self.trunk.scale(factor)
+    for leaf in self.leaves:
+      leaf.scale(factor)
   
   def translate(self, dx, dy):
     self.x += dx
@@ -36,7 +41,14 @@ class Tree:
     self.trunk.translate(dx, dy)
     for leaf in self.leaves:
       leaf.translate(dx, dy)
+    for apple in self.apples:
+      apple.translate(dx, dy)
   
   def animate(self):
     self.scale(1.0008)
     self.translate(0, -0.01)
+  
+  def addApples(self):
+    self.apples = []
+    for leaf in self.leaves:
+      self.apples.append(Circle(leaf.x, leaf.y, 3, fillColor=RED, borderColor=RED))
