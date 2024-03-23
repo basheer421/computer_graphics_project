@@ -38,6 +38,9 @@ tree = Tree(120, 400, 10, 50)
 
 person = Person((250, 450))
 
+water_lake = Circle(display[0], person.hands[0].y, 90, fillColor=BLUE, borderColor=BLUE)
+water_pipe = Rect(person.hands[0].x, person.hands[0].y, display[0], 10, 0, fillColor=YELLOW, borderColor=BLACK)
+
 # Set up clock for controlling frame rate
 clock = pygame.time.Clock()
 target_fps = 60
@@ -63,6 +66,8 @@ while True:
 	grass.draw()
 	sun.draw()
 	person.draw()
+	water_lake.draw()
+	water_pipe.draw()
 	if (time > 5):
 		tree.draw()
 
@@ -74,6 +79,7 @@ while True:
 	
 	if (time < 4):
 		person.translate(-person.dx, 0)
+		water_pipe.translate(-person.dx, 0)
 	
 	
 	pygame.display.flip()
