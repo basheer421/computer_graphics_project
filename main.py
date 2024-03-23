@@ -68,6 +68,7 @@ while True:
 	person.draw()
 	water_lake.draw()
 	water_pipe.draw()
+	
 	if (time > 5):
 		tree.draw()
 
@@ -76,6 +77,11 @@ while True:
 		cloud.draw()
 	if (time > 5) and (time < 19):
 		tree.animate()
+		water = Rect(person.hands[0].x, person.hands[0].y, 50, 10, 20, fillColor=BLUE, borderColor=BLUE)
+		water_start = Circle(person.hands[0].x, person.hands[0].y + 5, 8, fillColor=BLUE, borderColor=BLUE)
+		water.translate(-50, -10)
+		water.draw()
+		water_start.draw()
 	
 	if (time < 4):
 		person.translate(-person.dx, 0)
