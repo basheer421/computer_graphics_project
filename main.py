@@ -10,9 +10,14 @@ from Triangle import Triangle
 from Cloud import Cloud
 from Tree import Tree
 from Person import Person
+from Drop import Drop
+import random
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 
 pygame.init()
-display = (800, 600)
+display = (SCREEN_WIDTH, SCREEN_HEIGHT)
 pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
 pygame.display.set_caption("Computer graphics scene")
 
@@ -34,12 +39,26 @@ clouds = [
 	Cloud(600, 155, 30)
 ]
 
+# Initialize raindrops
+rain = []
+for cloud in clouds:
+		for i in range(10):
+				drop = Drop(cloud.x + random.randint(-20, 20), cloud.y + random.randint(-20, 20))
+				rain.append(drop)
+
+# Animate raindrops
+def animate_rain():
+		for drop in rain:
+				drop.move()
+				if drop.y > SCREEN_HEIGHT:  # If drop falls off the screen, reset it
+						drop.reset(drop.x, random.randint(-20, -10))
+				drop.draw()
+
 tree = Tree(120, 400, 10, 50)
 
 person = Person((250, 450))
 
 water_lake = Circle(display[0], person.hands[0].y, 90, fillColor=BLUE, borderColor=BLUE)
-water_pipe = Rect(person.hands[0].x, person.hands[0].y, display[0], 10, 0, fillColor=YELLOW, borderColor=BLACK)
 
 scenes = [True, False, False]
 # Set up clock for controlling frame rate
@@ -89,23 +108,22 @@ while True:
 		for cloud in clouds:
 			cloud.animate()
 			cloud.draw()
+		
+		animate_rain()
 
 		if (time > 5) and (time < 19):
 			tree.animate()
-			water = Rect(person.hands[0].x, person.hands[0].y, 50, 10, 20,
-				fillColor=BLUE, borderColor=BLUE)
-			water_start = Circle(person.hands[0].x, person.hands[0].y + 5, 8,
-				fillColor=BLUE, borderColor=BLUE)
-			water.translate(-50, -10)
-			water.draw()
-			water_start.draw()
-		
-		if (time < 19):
-			water_pipe.draw()
+			# water = Rect(person.hands[0].x, person.hands[0].y, 50, 10, 20,
+			# 	fillColor=BLUE, borderColor=BLUE)
+			# water_start = Circle(person.hands[0].x, person.hands[0].y + 5, 8,
+			# 	fillColor=BLUE, borderColor=BLUE)
+			# water.translate(-50, -10)
+			# water.draw()
+			# water_start.draw()
 		
 		if (time < 4):
 			person.translate(-person.dx, 0)
-			water_pipe.translate(-person.dx, 0)
+			# water_pipe.translate(-person.dx, 0)
 	elif (scenes[1] == True):
 		sky.draw()
 		grass.draw()
