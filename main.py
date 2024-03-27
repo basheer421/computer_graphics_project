@@ -19,7 +19,7 @@ SCREEN_HEIGHT = 600
 pygame.init()
 display = (SCREEN_WIDTH, SCREEN_HEIGHT)
 pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
-pygame.display.set_caption("Computer graphics scene")
+pygame.display.set_caption("Computer graphics")
 
 # Set up OpenGL orthographic projection for 2D rendering
 glMatrixMode(GL_PROJECTION)
@@ -55,6 +55,7 @@ def animate_rain():
 				drop.draw()
 
 tree = Tree(120, 400, 10, 50)
+tree2 = Tree(300, 400, 10, 50)
 taken_apple = Circle(0, 0, 3, fillColor=RED, borderColor=RED)
 
 person = Person((250, 450))
@@ -70,12 +71,16 @@ SCENE1END = pygame.USEREVENT + 2
 SCENE2START = pygame.USEREVENT + 3
 SCENE2END = pygame.USEREVENT + 4
 SCENE3START = pygame.USEREVENT + 5
-SCENE3END = pygame.USEREVENT + 6
+ADDAPPLES2 = pygame.USEREVENT + 6
+SCENE3END = pygame.USEREVENT + 7
 
 pygame.time.set_timer(ADDAPPLES, 15000, loops=1)
 pygame.time.set_timer(SCENE1END, 20000, loops=1)
 pygame.time.set_timer(SCENE2START, 22000, loops=1)
 pygame.time.set_timer(SCENE2END, 34000, loops=1)
+pygame.time.set_timer(SCENE3START, 36000, loops=1)
+pygame.time.set_timer(ADDAPPLES2, 48000, loops=1)
+pygame.time.set_timer(SCENE3END, 50000, loops=1)
 
 while True:
 	for event in pygame.event.get():
@@ -93,8 +98,12 @@ while True:
 			scenes[1] = False
 		elif (event.type == SCENE3START):
 			scenes[2] = True
+		elif (event.type == ADDAPPLES2):
+			tree2.addApples()
 		elif (event.type == SCENE3END):
 			scenes[2] = False
+			pygame.quit()
+			quit()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 	glLoadIdentity()
@@ -127,6 +136,7 @@ while True:
 		tree.draw()
 		person.draw()
 		for cloud in clouds:
+			cloud.animate()
 			cloud.draw()
 		if (time < 28):
 			person.translate(-person.dx, 0)
@@ -136,6 +146,28 @@ while True:
 			taken_apple.draw()
 
 	elif (scenes[2] == True):
-		pass
+		if (time < 45):
+			person.translate(person.dx, 0)
+		sky.draw()
+		grass.draw()
+		sun.draw()
+		person.draw()
+		water_lake.draw()
+		tree.draw()
+		person.draw()
+		for cloud in clouds:
+			cloud.animate()
+			cloud.draw()
+		taken_apple.x = person.hands[0].x
+		taken_apple.y = person.hands[0].y
+		taken_apple.draw()
+		for cloud in clouds:
+			cloud.draw()
+		if (time > 43):
+			animate_rain()
+		if (time > 45):
+			tree2.animate()
+			tree2.draw()
+
 	pygame.display.flip()
 	clock.tick(target_fps)
