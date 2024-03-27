@@ -47,10 +47,12 @@ clock = pygame.time.Clock()
 target_fps = 60
 ADDAPPLES = pygame.USEREVENT + 1
 SCENE1END = pygame.USEREVENT + 2
-SCENE2END = pygame.USEREVENT + 3
+SCENE2START = pygame.USEREVENT + 3
+SCENE2END = pygame.USEREVENT + 4
 
 pygame.time.set_timer(ADDAPPLES, 15000, loops=1) # 15 seconds
 pygame.time.set_timer(SCENE1END, 20000, loops=1) # 20 seconds
+pygame.time.set_timer(SCENE2START, 21000, loops=1) # 20 seconds
 pygame.time.set_timer(SCENE2END, 30000, loops=1) # 30 seconds
 
 while True:
@@ -63,11 +65,10 @@ while True:
 			tree.addApples()
 		elif (event.type == SCENE1END):
 			scenes[0] = False
+		elif (event.type == SCENE2START):
 			scenes[1] = True
 		elif (event.type == SCENE2END):
-			scenes[0] = False
 			scenes[1] = False
-			scenes[2] = True
 
 	# Clear the screen and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -91,8 +92,10 @@ while True:
 
 		if (time > 5) and (time < 19):
 			tree.animate()
-			water = Rect(person.hands[0].x, person.hands[0].y, 50, 10, 20, fillColor=BLUE, borderColor=BLUE)
-			water_start = Circle(person.hands[0].x, person.hands[0].y + 5, 8, fillColor=BLUE, borderColor=BLUE)
+			water = Rect(person.hands[0].x, person.hands[0].y, 50, 10, 20,
+				fillColor=BLUE, borderColor=BLUE)
+			water_start = Circle(person.hands[0].x, person.hands[0].y + 5, 8,
+				fillColor=BLUE, borderColor=BLUE)
 			water.translate(-50, -10)
 			water.draw()
 			water_start.draw()
@@ -103,5 +106,16 @@ while True:
 		if (time < 4):
 			person.translate(-person.dx, 0)
 			water_pipe.translate(-person.dx, 0)
+	elif (scenes[1] == True):
+		sky.draw()
+		grass.draw()
+		sun.draw()
+		person.draw()
+		water_lake.draw()
+		tree.draw()
+		for cloud in clouds:
+			cloud.draw()
+		if (time < 29):
+			person.translate(person.dx, 0)
 	pygame.display.flip()
 	clock.tick(target_fps)
