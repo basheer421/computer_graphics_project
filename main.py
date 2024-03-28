@@ -13,9 +13,6 @@ from Person import Person
 from Drop import Drop
 import random
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-
 pygame.init()
 display = (SCREEN_WIDTH, SCREEN_HEIGHT)
 pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
@@ -53,6 +50,7 @@ def animate_rain():
 				drop.draw()
 
 tree = Tree(120, 400, 10, 50)
+tree.rotate(15)
 tree2 = Tree(300, 400, 10, 50)
 taken_apple = Circle(0, 0, 3, fillColor=RED, borderColor=RED)
 
@@ -154,8 +152,6 @@ while True:
 		person.draw()
 		for cloud in clouds:
 			cloud.animate()
-			cloud.draw()
-		for cloud in clouds:
 			cloud.draw()
 		animate_rain()
 		if (time > 45):
