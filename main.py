@@ -39,18 +39,16 @@ clouds = [
 	Cloud(600, 155, 30)
 ]
 
-# Initialize raindrops
 rain = []
 for cloud in clouds:
 		for i in range(10):
 				drop = Drop(cloud.x + random.randint(-20, 20), cloud.y + random.randint(-20, 20))
 				rain.append(drop)
 
-# Animate raindrops
 def animate_rain():
 		for drop in rain:
 				drop.move()
-				if drop.y > SCREEN_HEIGHT:  # If drop falls off the screen, reset it
+				if drop.y > SCREEN_HEIGHT:
 						drop.reset(drop.x, random.randint(-20, -10))
 				drop.draw()
 
@@ -80,7 +78,7 @@ pygame.time.set_timer(SCENE2START, 22000, loops=1)
 pygame.time.set_timer(SCENE2END, 34000, loops=1)
 pygame.time.set_timer(SCENE3START, 36000, loops=1)
 pygame.time.set_timer(ADDAPPLES2, 48000, loops=1)
-pygame.time.set_timer(SCENE3END, 50000, loops=1)
+pygame.time.set_timer(SCENE3END, 53000, loops=1)
 
 while True:
 	for event in pygame.event.get():
@@ -140,14 +138,13 @@ while True:
 			cloud.draw()
 		if (time < 28):
 			person.translate(-person.dx, 0)
-		else:
+		elif (time < 32):
+			person.translate(person.dx, 0)
 			taken_apple.x = person.hands[0].x
 			taken_apple.y = person.hands[0].y
 			taken_apple.draw()
 
 	elif (scenes[2] == True):
-		if (time < 45):
-			person.translate(person.dx, 0)
 		sky.draw()
 		grass.draw()
 		sun.draw()
@@ -158,15 +155,12 @@ while True:
 		for cloud in clouds:
 			cloud.animate()
 			cloud.draw()
-		taken_apple.x = person.hands[0].x
-		taken_apple.y = person.hands[0].y
-		taken_apple.draw()
 		for cloud in clouds:
 			cloud.draw()
-		if (time > 43):
-			animate_rain()
+		animate_rain()
 		if (time > 45):
-			tree2.animate()
+			if (time < 53):
+				tree2.animate()
 			tree2.draw()
 
 	pygame.display.flip()
